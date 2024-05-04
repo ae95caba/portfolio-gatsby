@@ -15,7 +15,9 @@ module.exports = {
     siteUrl: `https://gatsbystarterdefaultsource.gatsbyjs.io/`,
   },
   plugins: [
+    "gatsby-plugin-typescript",
     `gatsby-plugin-image`,
+    "gatsby-plugin-sass",
     {
       resolve: `gatsby-source-filesystem`,
       options: {
