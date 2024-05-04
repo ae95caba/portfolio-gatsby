@@ -1,30 +1,39 @@
 import React from "react"
-import { useState, useEffect, useRef } from "react"
-import skills from "../assets/data/skills/skills"
 
+import skills from "../assets/data/skills/skills"
+import { useStaticQuery, graphql } from "gatsby"
 import stroke from "../assets/strokes/stroke.svg"
 import wavingHand from "../assets/waving-hand.png"
 import linkedinLogo from "../assets/links/linkedin.svg"
 import githubLogo from "../assets/links/github.svg"
 import resumeLogo from "../assets/links/resume.svg"
 export default function Hero() {
+  const data = useStaticQuery(graphql`
+    query {
+      hero {
+        title
+        description
+      }
+    }
+  `)
+
+  const title = data.hero.title
+  const description = data.hero.description
+
   return (
     <section id="hero">
       <div className="background"></div>
       <div className="content">
         <div className="container">
           <div className="sub-container">
-            <h1>Desarrollador Front End</h1>
+            <h1>{title}</h1>
             <img className="stroke" src={stroke} />
             <p>
               Hola, soy Andre Espinoza.
               <span>
                 <img src={wavingHand} alt="waving hand" />
               </span>
-              <br /> Utilizo ReactJS con Gatsby y SCSS para el Frontend,
-              mientras que para el Backend empleo ExpressJS con Mongoose.
-              Además, tengo conocimientos básicos de testing con Jest y UI/UX.
-              Bienvenidos a mi página.
+              <br /> {description}
             </p>
             <ul className="links">
               <li>

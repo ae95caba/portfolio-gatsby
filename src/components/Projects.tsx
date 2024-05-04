@@ -6,7 +6,7 @@ import backgroundStroke from "../assets/strokes/background-stroke.png"
 import { useStaticQuery, graphql } from "gatsby"
 export default function Projects() {
   const data = useStaticQuery(graphql`
-    query MyQuery {
+    query {
       projects: allProject {
         nodes {
           name
