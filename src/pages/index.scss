@@ -199,6 +199,8 @@ header {
           transform: scale(3, 2) rotate(45deg);
         }
         h1 {
+          -webkit-text-stroke-width: 1px;
+          -webkit-text-stroke-color: white;
           position: relative;
           text-transform: capitalize;
           z-index: 2;
@@ -383,10 +385,10 @@ header {
               bottom: -145px;
             }
             h4 {
-              padding: 1rem;
+              padding: 1rem 0rem 1rem 0.5rem;
               position: relative;
               z-index: 2;
-              width: fit-content;
+              width: 200px;
 
               font-size: 1.2rem;
 
@@ -548,6 +550,8 @@ header {
 }
 
 #contact {
+  position: relative;
+  z-index: 10;
   background-color: $primary-color;
 
   .content {

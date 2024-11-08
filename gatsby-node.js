@@ -9,6 +9,7 @@
  */
 
 const crypto = require("crypto")
+require("dotenv").config()
 
 exports.createPages = async ({ actions }) => {
   const { createPage } = actions
@@ -24,31 +25,37 @@ exports.sourceNodes = async ({ actions, createNodeId }) => {
   const { createNode } = actions
 
   const fetchProjectsData = async () => {
-    const response = await fetch(
-      "https://api.sheety.co/a4086d3d6f9ed03996e1169108d1fd8e/portfolio/projects"
-    )
+    const apiUrl = process.env.GATSBY_PROJECTS_API_URL
+    console.log(`projects url`)
+    console.log(apiUrl)
+    const response = await fetch(apiUrl)
 
     if (!response.ok) {
       throw new Error("Request failed")
     }
-
+    // Get the last segment of the URL path (in this case, 'projects')
+    const parts = apiUrl.split("/")
+    const lastSegment = parts[parts.length - 1]
     const data = await response.json()
-
-    return data
+    const projectsData = data[lastSegment]
+    return projectsData
   }
 
   const fetchHeroData = async () => {
-    const response = await fetch(
-      "https://api.sheety.co/a4086d3d6f9ed03996e1169108d1fd8e/portfolio/hero"
-    )
+    const apiUrl = process.env.GATSBY_HERO_API_URL
+    console.log(`hero url`)
+    console.log(apiUrl)
+    const response = await fetch(apiUrl)
 
     if (!response.ok) {
       throw new Error("Request failed")
     }
-
+    // Get the last segment of the URL path (in this case, 'projects')
+    const parts = apiUrl.split("/")
+    const lastSegment = parts[parts.length - 1]
     const data = await response.json()
-
-    return data
+    const heroData = data[lastSegment]
+    return heroData
   }
 
   try {
@@ -56,9 +63,9 @@ exports.sourceNodes = async ({ actions, createNodeId }) => {
     const projectsData = await fetchProjectsData()
     const heroData = await fetchHeroData()
     //
-    const projects = projectsData.projects
-    const hero = heroData.hero[0]
-
+    const projects = projectsData
+    const hero = heroData[0]
+    console.log(JSON.stringify(projects))
     // Map into these results and create nodes
     projects.forEach((project, index) => {
       // Create your node object

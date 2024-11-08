@@ -1,32 +1,43 @@
-import React from "react";
-import Reveal from "./Reveal";
-import checkMark from "../assets/check-mark.svg";
-import cornerStroke from "../assets/strokes/corner-stroke.svg";
-import bottomStroke from "../assets/strokes/bottom-stroke.svg";
+import React from "react"
+import Reveal from "./Reveal"
+import checkMark from "../assets/check-mark.svg"
+import cornerStroke from "../assets/strokes/corner-stroke.svg"
+import bottomStroke from "../assets/strokes/bottom-stroke.svg"
 
 export default function AboutMe() {
   const goals = [
     {
       title: "Responsivas",
       description:
-        "El diseño debe ser responsivo y visualmente atractivo en todos los dispositivos.",
+        "Mis aplicaciones se adaptan perfectamente a cualquier dispositivo, garantizando una experiencia de usuario fluida.",
     },
     {
       title: "Fácil de mantener",
       description:
-        "El código debe ser escrito con claridad, modularidad y legibilidad en mente, para facilitar el debugging, la comprensión y la extensibilidad.",
+        "Código modular y legible para facilitar la comprensión, mantenimiento y escalabilidad.",
     },
     {
-      title: "Usar las ultimas tecnologías",
+      title: "Escalables",
       description:
-        "Los proyectos deben usar las ultimas tecnologías para obtener una ventaja ante la competencia",
+        "Las aplicaciones están diseñadas para crecer junto con las necesidades del negocio.",
     },
     {
-      title: "Atractivos visualmente",
+      title: "Seguras",
       description:
-        "El diseño debe priorizar la UX (experiencia de usuario) y apuntar a una UI (interfaz de usuario) bien pulida ",
+        "Implemento buenas prácticas de seguridad para proteger los datos y la integridad de las aplicaciones.",
     },
-  ];
+    {
+      title: "Uso de tecnologías modernas",
+      description:
+        "Trabajo con las últimas tecnologías para ofrecer soluciones rápidas y eficientes.",
+    },
+    {
+      title: "Desempeño óptimo",
+      description:
+        "Mis aplicaciones están optimizadas para un rendimiento veloz y eficiente, tanto en el front-end como en el back-end.",
+    },
+  ]
+
   return (
     <section id="about">
       <div className="background"></div>
@@ -42,12 +53,12 @@ export default function AboutMe() {
         </div>
       </div>
     </section>
-  );
+  )
 }
 
 interface Goal {
-  title: string;
-  description: string;
+  title: string
+  description: string
 }
 
 function Card({ goal }: { goal: Goal }) {
@@ -61,5 +72,5 @@ function Card({ goal }: { goal: Goal }) {
       <p className="description">{goal.description}</p>
       <img className="bottom-stroke" src={bottomStroke} alt="" />
     </div>
-  );
+  )
 }
