@@ -87,46 +87,57 @@ export default function Hero() {
 function Skills({ skills }) {
   return (
     <section id="skills">
-      <h2>Skills</h2>
-      <Swiper
-        modules={[Autoplay]}
-        spaceBetween={30}
-        slidesPerView={6}
-        loop={true}
-        autoplay={{
-          delay: 2000,
-          disableOnInteraction: false,
-        }}
-        speed={1000}
-        className="skills-swiper"
-        breakpoints={{
-          320: {
-            slidesPerView: 3,
-            spaceBetween: 20,
-          },
-          480: {
-            slidesPerView: 4,
-            spaceBetween: 25,
-          },
-          768: {
-            slidesPerView: 5,
-            spaceBetween: 30,
-          },
-          1024: {
-            slidesPerView: 6,
-            spaceBetween: 30,
-          },
-        }}
-      >
-        {skills.map((skill, index) => (
-          <SwiperSlide key={skill.name}>
-            <div className="skill-item">
-              <img src={skill.logo} alt={skill.name} draggable="false" />
-              <div className="tooltip">{skill.name}</div>
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+      <div className="slider">
+        <h2>Skills</h2>
+        <Swiper
+          modules={[Autoplay]}
+          spaceBetween={0}
+          slidesPerView={6}
+          loop={true}
+          autoplay={{
+            delay: 2000,
+            disableOnInteraction: false,
+          }}
+          speed={1000}
+          className="skills-swiper"
+          grabCursor={true}
+          allowTouchMove={true}
+          touchRatio={1}
+          resistance={false}
+          shortSwipes={true}
+          longSwipes={true}
+          followFinger={true}
+          preventClicks={false}
+          preventClicksPropagation={false}
+          breakpoints={{
+            320: {
+              slidesPerView: 3,
+              spaceBetween: 0,
+            },
+            480: {
+              slidesPerView: 4,
+              spaceBetween: 0,
+            },
+            768: {
+              slidesPerView: 5,
+              spaceBetween: 0,
+            },
+            1024: {
+              slidesPerView: 6,
+              spaceBetween: 0,
+            },
+          }}
+        >
+          {skills.map((skill, index) => (
+            <SwiperSlide key={skill.name}>
+              <div className="skill-item">
+                <img src={skill.logo} alt={skill.name} draggable={false} />
+                <div className="tooltip">{skill.name}</div>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
     </section>
   )
 }
