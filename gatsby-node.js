@@ -58,13 +58,32 @@ exports.sourceNodes = async ({ actions, createNodeId }) => {
     return heroData
   }
 
+  const fetchSkillsData = async () => {
+    const apiUrl = process.env.GATSBY_SKILLS_API_URL
+    console.log(`skills url`)
+    console.log(apiUrl)
+    const response = await fetch(apiUrl)
+
+    if (!response.ok) {
+      throw new Error("Request failed")
+    }
+    const parts = apiUrl.split("/")
+    const lastSegment = parts[parts.length - 1]
+    const data = await response.json()
+    const skillsData = data[lastSegment]
+    return skillsData
+  }
+
   try {
     // Await for results
     const projectsData = await fetchProjectsData()
     const heroData = await fetchHeroData()
+    const skillsData = await fetchSkillsData()
     //
     const projects = projectsData
+    // heroData is an array with a single hero object, so we take the first (and only) item
     const hero = heroData[0]
+    const skills = skillsData
     console.log(JSON.stringify(projects))
     // Map into these results and create nodes
     projects.forEach((project, index) => {
@@ -137,6 +156,31 @@ exports.sourceNodes = async ({ actions, createNodeId }) => {
 
     // Create node with the Gatsby createNode() API
     createNode(heroNode)
+
+    // Create skills nodes
+    skills.forEach((skill, index) => {
+      const skillNode = {
+        id: `skill-${skill.name}-${index}`,
+        parent: `__SOURCE__`,
+        internal: {
+          type: `Skill`,
+        },
+        children: [],
+        name: skill.name,
+        logo: skill.logo, // This will be the fixed URL from the imported SVG
+      }
+
+      // Get content digest of node. (Required field)
+      const contentDigest = crypto
+        .createHash(`md5`)
+        .update(JSON.stringify(skillNode))
+        .digest(`hex`)
+      // Add it to skillNode
+      skillNode.internal.contentDigest = contentDigest
+
+      // Create node with the Gatsby createNode() API
+      createNode(skillNode)
+    })
   } catch (error) {
     console.error("Error fetching data from the API:", error)
   }

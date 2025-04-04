@@ -10,18 +10,52 @@ import scssLogo from "./scss.svg"
 import mongodbLogo from "./mongodb.svg"
 import typescriptLogo from "./typescript.svg"
 
-const skills = {
-  Git: gitLogo,
-  CSS: cssLogo,
-  GraphQL: graphqlLogo,
-  Express: expressLogo,
-  React: reactLogo,
-  Jest: jestLogo,
-  HTML: htmlLogo,
-  JS: jsLogo,
-  MongoDB: mongodbLogo,
-  SCSS: scssLogo,
-  TypeScript: typescriptLogo,
-}
+// Fixed URLs for skill logos
+const skills = [
+  {
+    name: "Git",
+    logo: gitLogo,
+  },
+  {
+    name: "CSS",
+    logo: cssLogo,
+  },
+  {
+    name: "GraphQL",
+    logo: graphqlLogo,
+  },
+  {
+    name: "Express",
+    logo: expressLogo,
+  },
+  {
+    name: "React",
+    logo: reactLogo,
+  },
+  {
+    name: "Jest",
+    logo: jestLogo,
+  },
+  {
+    name: "HTML",
+    logo: htmlLogo,
+  },
+  {
+    name: "JavaScript",
+    logo: jsLogo,
+  },
+  {
+    name: "MongoDB",
+    logo: mongodbLogo,
+  },
+  {
+    name: "SCSS",
+    logo: scssLogo,
+  },
+  {
+    name: "TypeScript",
+    logo: typescriptLogo,
+  },
+]
 
 export default skills

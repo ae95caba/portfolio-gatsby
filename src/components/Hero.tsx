@@ -1,12 +1,16 @@
-import React from "react"
-
-import skills from "../assets/data/skills/skills"
+import React, { useRef, useState, useEffect } from "react"
 import { useStaticQuery, graphql } from "gatsby"
+import { motion, useScroll, useTransform, useAnimation } from "framer-motion"
+import { Swiper, SwiperSlide } from "swiper/react"
+import { Autoplay } from "swiper/modules"
+import "swiper/css"
+import "swiper/css/autoplay"
 import stroke from "../assets/strokes/stroke.svg"
 import wavingHand from "../assets/waving-hand.png"
 import linkedinLogo from "../assets/links/linkedin.svg"
 import githubLogo from "../assets/links/github.svg"
 import resumeLogo from "../assets/links/resume.svg"
+
 export default function Hero() {
   const data = useStaticQuery(graphql`
     query {
@@ -14,11 +18,18 @@ export default function Hero() {
         title
         description
       }
+      allSkill {
+        nodes {
+          name
+          logo
+        }
+      }
     }
   `)
 
   const title = data.hero.title
   const description = data.hero.description
+  const skills = data.allSkill.nodes
 
   return (
     <section id="hero">
@@ -67,34 +78,55 @@ export default function Hero() {
           </div>
           <div className="avatar"> </div>
         </div>
-        <Skills />
+        <Skills skills={skills} />
       </div>
     </section>
   )
 }
 
-function Skills() {
+function Skills({ skills }) {
   return (
     <section id="skills">
-      <div className="slider">
-        <div className="box">Skills</div>
-        <ul>
-          {Object.keys(skills).map((skill, index) => (
-            <li key={`${skill}-A`}>
-              <img src={skills[skill]} alt={skill} />
-              <div className="tooltip">{skill}</div>
-            </li>
-          ))}
-        </ul>
-        <ul>
-          {Object.keys(skills).map((skill, index) => (
-            <li key={`${skill}-B`}>
-              <img src={skills[skill]} alt={skill} />
-              <div className="tooltip">{skill}</div>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <h2>Skills</h2>
+      <Swiper
+        modules={[Autoplay]}
+        spaceBetween={30}
+        slidesPerView={6}
+        loop={true}
+        autoplay={{
+          delay: 2000,
+          disableOnInteraction: false,
+        }}
+        speed={1000}
+        className="skills-swiper"
+        breakpoints={{
+          320: {
+            slidesPerView: 3,
+            spaceBetween: 20,
+          },
+          480: {
+            slidesPerView: 4,
+            spaceBetween: 25,
+          },
+          768: {
+            slidesPerView: 5,
+            spaceBetween: 30,
+          },
+          1024: {
+            slidesPerView: 6,
+            spaceBetween: 30,
+          },
+        }}
+      >
+        {skills.map((skill, index) => (
+          <SwiperSlide key={skill.name}>
+            <div className="skill-item">
+              <img src={skill.logo} alt={skill.name} draggable="false" />
+              <div className="tooltip">{skill.name}</div>
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </section>
   )
 }
