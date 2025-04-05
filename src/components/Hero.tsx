@@ -10,6 +10,7 @@ import wavingHand from "../assets/waving-hand.png"
 import linkedinLogo from "../assets/links/linkedin.svg"
 import githubLogo from "../assets/links/github.svg"
 import resumeLogo from "../assets/links/resume.svg"
+import avatar1 from "../assets/avatars/1.jpeg"
 
 export default function Hero() {
   const data = useStaticQuery(graphql`
@@ -76,7 +77,9 @@ export default function Hero() {
               </li>
             </ul>
           </div>
-          <div className="avatar"> </div>
+          <div className="liquid-avatar">
+            <img src={avatar1} alt="André Espinoza" />
+          </div>
         </div>
         <Skills skills={skills} />
       </div>
