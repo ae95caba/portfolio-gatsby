@@ -127,7 +127,37 @@ function ProjectCard({ projectData }: { projectData: Project }) {
 
       <div className="description">
         <h3>{projectData.name}</h3>
-        <p>{projectData.description}</p>
+        <p>
+          <div
+            className="description-content"
+            ref={el => {
+              if (el) {
+                // Check if content overflows
+                const hasOverflow = el.scrollHeight > el.clientHeight
+                el.classList.toggle("overflow", hasOverflow)
+              }
+            }}
+            onScroll={e => {
+              const content = e.currentTarget
+              const scrollableHeight =
+                content.scrollHeight - content.clientHeight
+              const scrollPercentage = Math.min(
+                (content.scrollTop / scrollableHeight) * 70,
+                70
+              )
+              const customScrollbar = content.nextElementSibling as HTMLElement
+              if (customScrollbar) {
+                customScrollbar.style.setProperty(
+                  "--scroll-position",
+                  `${scrollPercentage}%`
+                )
+              }
+            }}
+          >
+            {projectData.description}
+          </div>
+          <div className="custom-scrollbar"></div>
+        </p>
         <ul className="technologies">
           {projectData.technologies.split(",").map(technology => (
             <li key={technology}>{technology}</li>
