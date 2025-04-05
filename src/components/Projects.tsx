@@ -5,6 +5,7 @@ import githubLogo from "../assets/links/github.svg"
 import newWindow from "../assets/newWindow.svg"
 import backgroundStroke from "../assets/strokes/background-stroke.png"
 import { useStaticQuery, graphql } from "gatsby"
+import PatternBackground from "./PatternBackground"
 
 export default function Projects() {
   const data = useStaticQuery(graphql`
@@ -31,15 +32,19 @@ export default function Projects() {
     <section id="projects">
       <div className="background"></div>
       <div className="content">
-        <img className="background-stroke first" src={backgroundStroke} />
-        <img className="background-stroke second" src={backgroundStroke} />
+        <PatternBackground
+          patternImage={backgroundStroke}
+          opacity={1}
+          gap={30}
+          className="pattern-background"
+        />
 
         <h2>Portfolio</h2>
         <h3>Estos son algunos de mis mejores projectos </h3>
 
         <div className="container">
           {projects.map(project => {
-            return <ProjectCard projectData={project} />
+            return <ProjectCard key={project.id} projectData={project} />
           })}
         </div>
       </div>
