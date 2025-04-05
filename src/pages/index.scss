@@ -213,12 +213,15 @@ header {
           transform: scale(3, 2) rotate(45deg);
         }
         h1 {
-          -webkit-text-stroke-width: 1px;
-          -webkit-text-stroke-color: white;
           position: relative;
           text-transform: capitalize;
           z-index: 2;
           font-size: 3rem;
+          text-shadow: 2px 2px 0 $third-color, -2px -2px 0 $third-color,
+            2px -2px 0 $third-color, -2px 2px 0 $third-color,
+            0 2px 0 $third-color, 2px 0 0 $third-color, 0 -2px 0 $third-color,
+            -2px 0 0 $third-color;
+          color: $primary-color;
         }
         p {
           line-height: 1.8rem;
